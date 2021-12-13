@@ -1,0 +1,302 @@
+*,
+*::before,
+*::after {
+  /*changing how padding is calculated to make it within a width instead of adding on to 
+    total width*/
+  box-sizing: border-box;
+}
+
+/*Custom Properties, update for own design*/
+:root {
+  /*should use name of font*/
+  --ff-primary: "Source Sans Pro", sans-serif;
+  --ff-secondary: "Source Code Pro", monospace;
+
+  --fw-reg: 300;
+  --fw-bold: 900;
+
+  --clr-light: #fff;
+  --clr-dark: #303030;
+  --clr-accent: #16e0bd;
+
+  --fs-h1: 3rem;
+  --fs-h2: 2.25rem;
+  --fs-h3: 1.25rem;
+  --fs-body: 1rem;
+
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+}
+
+@media (min-width: 800px) {
+  :root {
+    --fs-h1: 4.5rem;
+    --fs-h2: 3.75rem;
+    --fs-h3: 1.5rem;
+    --fs-body: 1.125rem;
+  }
+}
+
+/*General Styles*/
+body {
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+section {
+  padding: 5em 2em;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+/*makes outline on buttons and other highlightable objects*/
+/*FIGURE OUT WHY ITS NOT CREATING AN OUTLINE TODO*/
+:focus {
+  outline: 3px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+/*Buttons*/
+/*making the "My Work" button for services*/
+.btn {
+  display: inline-block;
+  padding: 0.5em 2.5em;
+  background: var(--clr-accent);
+  color: var(--clr-dark);
+  text-decoration: none;
+  /*in case putting it on a button in stead of a link*/
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: var(--fw-bold);
+  transition: transform 200ms ease-in-out;
+}
+/*when hoving on a button it gets a lil bigger*/
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/*Typography*/
+h1,
+h2,
+h3 {
+  line-height: 1.05;
+  margin: 0;
+}
+h1 {
+  font-size: var(--fs-h1);
+}
+h1 {
+  font-size: var(--fs-h1);
+}
+h1 {
+  font-size: var(--fs-h1);
+}
+
+.section__title {
+  margin-bottom: 0.25em;
+}
+.section__title--intro {
+  font-weight: var(--fw-reg);
+}
+.section__title--intro strong {
+  display: block;
+}
+.section__subtitle {
+  margin: 0;
+  font-size: var(--fs-h3);
+}
+.section__subtitle--intro,
+.section__subtitle--about {
+  background-color: var(--clr-accent);
+  font-family: var(--ff-secondary);
+  margin-bottom: 1em;
+  padding: 0.25em 1em;
+}
+
+/*Header*/
+nav {
+  display: none;
+}
+/*Intro Section*/
+.intro {
+  position: relative;
+}
+.intro__img {
+  box-shadow: var(--bs);
+}
+/*go from 300, 600, 900*/
+@media (min-width: 600px) {
+  .intro {
+    display: grid;
+    width: min-content;
+    margin: 0 auto;
+    grid-column-gap: 1em;
+    grid-template-areas:
+      "img title"
+      "img subtitle";
+    grid-template-columns: min-content max-content;
+  }
+  .intro__img {
+    grid-area: img;
+    min-width: 250px;
+    position: relative;
+    z-index: 2;
+  }
+  .section__subtitle--intro {
+    align-self: start;
+    grid-column: -1 / 1;
+    grid-row: 2;
+    text-align: right;
+    position: relative;
+    left: -1.5em;
+    width: calc(100% + 1.5em);
+  }
+}
+
+/*My Services Section */
+
+.my-services {
+  background-color: var(--clr-dark);
+  background-image: url(../img/servicesbg.jpeg);
+  background-size: cover;
+  background-blend-mode: multiply;
+  color: var(--clr-light);
+  text-align: center;
+}
+.section__title--services {
+  color: var(--clr-accent);
+  position: relative;
+}
+/*makes decorative line after the title*/
+.section__title--services::after {
+  content: "";
+  display: block;
+  width: 2em;
+  height: 1px;
+  margin: 0.5em auto 1em;
+  /*can use currentColor to match color of text*/
+  background: var(--clr-light);
+  opacity: 0.25;
+}
+/*adds padding to bottom of text to move button away*/
+.services {
+  margin-bottom: 4em;
+}
+/*stop the text at small sizes to become too long */
+.service {
+  max-width: 500px;
+  /*margin: 0 auto keeps text centered*/
+  margin: 0 auto;
+}
+@media (min-width: 800px) {
+  /*get the services into different columns*/
+  .services {
+    display: flex;
+    max-width: 1000px;
+    /*to not overright the margin button for the button*/
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /*space between the service descriptions*/
+  /*plus combinator*/
+  /*looks at siblings, ignoring the first one, adding margine of 2em to the left of the siblings, creating space*/
+  /*doesnt add to left of the original(doesnt create gap w side of screen)*/
+  .service + .service {
+    margin-left: 2em;
+  }
+}
+
+/*About Me*/
+
+.about-me {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.about-me__img {
+  box-shadow: var(--bs);
+}
+.section__subtitle--about {
+  height: 3.5em;
+}
+/*use pixels in media queries*/
+@media (min-width: 600px) {
+  .about-me {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-template-areas:
+      "title img"
+      "subtitle img"
+      "text img";
+    grid-column-gap: 2em;
+  }
+  .section__title--about {
+    grid-area: title;
+  }
+  .section__subtitle--about {
+    /*goes from one side all the way over to the other side*/
+    grid-column: 1/-1;
+    grid-row: 2;
+    position: relative;
+    left: -1em;
+    width: calc(100% + 2em);
+    padding-left: 1em;
+    /*text will never touch the image*/
+    padding-right: calc(200px + 4em);
+  }
+  .about-me__img {
+    /*
+    starting at the top and ending at the last row automatically 
+    grid-row: 1/-1;
+    /*start at grid column line 2
+    grid-column: 2;
+    */
+    grid-area: img;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/*My Work*/
+
+.my-work {
+  background-color: var(--clr-dark);
+  color: var(--clr-light);
+  text-align: center;
+}
+.section__subtitle--work {
+  color: var(--clr-accent);
+  font-weight: var(--fw-bold);
+  margin-bottom: 2em;
+}
+.portfolio {
+  display: grid;
+  /*repeat(3, 1fr) makes 3 columns*/
+  /*auto fit automatically fits the images into their spots but cannot use fr have to use minmax()*/
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /*can set max width to prevent one large row, need margin(0, auto) to keep centered on screen*/
+}
+.portfolio__item {
+  background: var(--clr-accent);
+  overflow: hidden;
+}
+.portfolio__img {
+  transition: transform 750ms, cubic-bezier(0.5, 0, 0.5, 1) opacity 250ms linear;
+}
+.portfolio__item:focus {
+  position: inherit;
+  z-index: 2;
+}
+.portfolio__img:hover,
+.portfolio__item:focus .portfolio__img {
+  transform: scale(1.2);
+  opacity: 0.75;
+}
