@@ -38,6 +38,12 @@
 }
 
 /*General Styles*/
+
+/*smooth transition*/
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--clr-light);
   color: var(--clr-dark);
@@ -175,6 +181,27 @@ header {
   right: 1em;
   top: 1em;
   /*need high z index to show the hamburger also position absolute*/
+  z-index: 1000;
+}
+/*when nav open is activated, move the navigation menu to screen*/
+.nav-open .nav {
+  transform: translateX(0);
+}
+/*when nav is open, it is fixed, but when nav is close it goes back to original place*/
+.nav-open .nav-toggle {
+  position: fixed;
+}
+/*when nav is open the burger rotates*/
+.nav-open .hamburger {
+  transform: rotate(0.625turn);
+}
+
+.nav-open .hamburger::before {
+  transform: rotate(90deg) translateX(-6px);
+}
+
+.nav-open .hamburger::after {
+  opacity: 0;
 }
 
 .hamburger {
@@ -184,7 +211,7 @@ header {
 .hamburger,
 .hamburger::before,
 .hamburger::after {
-  background-color: var(--clr-dark);
+  background-color: var(--clr-accent);
   width: 2em;
   height: 3px;
   border-radius: 1em;
